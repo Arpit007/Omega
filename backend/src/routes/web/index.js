@@ -34,7 +34,7 @@ router.get('/home', authorise.webAuthorise, (req, res) => res.render('home.html'
 
 router.get('/', redirectOnLoggedIn, (req, res) => res.render('index.html', { req : req, title : xConfig.appName }));
 
-router.get('/onLogin', authorise.webAuthorise, (req, res) => {
+router.get('/onAuth', authorise.webAuthorise, (req, res) => {
     if (req.user) {
         req.session[ 'auth-token' ] = req.token;
         res.redirect('/home');

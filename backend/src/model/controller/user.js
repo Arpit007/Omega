@@ -57,7 +57,7 @@ UserSchema.statics.register = (fields) => {
     let opts = {};
     
     if (!fields)
-        throw new error.InvalidRequestError('invalid_parameter', 'all');
+        throw new error.InvalidRequestError('missing_parameter', 'all');
     if (!fields.handle)
         throw new error.InvalidRequestError('missing_parameter', 'handle');
     else opts.handle = fields.handle.trim();

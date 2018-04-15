@@ -22,3 +22,15 @@ img.bg-image{
 .opacity-40{
 	opacity: 0.4;
 }
+
+
+.logoLink{
+	color: white;
+	text-decoration: none;
+}
+.logoLink:hover {
+	text-decoration: none;
+}
+.logoLink:hover .fa {
+	color: white;
+}

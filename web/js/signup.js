@@ -1,23 +1,26 @@
 /**
- * Created by StarkX on 15-Apr-18.
+ * Created by StarkX on 16-Apr-18.
  */
 
-$('#btnLogin').click(() => {
-    let form = $('#formLogin');
-    let emailFeedback = $('#formLogin #emailFeedback');
-    let passwordFeedback = $('#formLogin #passwordFeedback');
-    let otherFeedback = $('#formLogin #otherFeedback');
-    let btn = $('#btnLogin');
-    let email = $('#formLogin #email');
-    let password = $('#formLogin #password');
-    let other = $('#formLogin #other');
-    let btnText = $('#btnLogin #text');
-    let spinner = $('#btnLogin #loginSpinner');
+$('#btnSignup').click(() => {
+    let form = $('#formSignup');
+    let emailFeedback = $('#formSignup #emailFeedback');
+    let handleFeedback = $('#formSignup #handleFeedback');
+    let passwordFeedback = $('#formSignup #passwordFeedback');
+    let otherFeedback = $('#formSignup #otherFeedback');
+    let btn = $('#btnSignup');
+    let email = $('#formSignup #email');
+    let handle = $('#formSignup #handle');
+    let password = $('#formSignup #password');
+    let other = $('#formSignup #other');
+    let btnText = $('#formSignup #text');
+    let spinner = $('#formSignup #signupSpinner');
     
     
     passwordFeedback.html('');
     emailFeedback.html('');
     otherFeedback.html('');
+    handleFeedback.html('');
     form.removeClass('was-validated');
     email.removeClass('is-valid');
     email.removeClass('is-invalid');
@@ -25,12 +28,15 @@ $('#btnLogin').click(() => {
     password.removeClass('is-invalid');
     other.removeClass('is-valid');
     other.removeClass('is-invalid');
+    handle.removeClass('is-valid');
+    handle.removeClass('is-invalid');
     
     let fields = {
         email : (email.val() + '').trim(),
+        handle : (handle.val() + '').trim(),
         password : (password.val() + '')
     };
-    let ef = false, pf = false;
+    let ef = false, pf = false, hf = false;
     if (!fields.email) {
         emailFeedback.html('Oops, you missed this one');
         ef = true;
@@ -53,12 +59,26 @@ $('#btnLogin').click(() => {
         pf = true;
     }
     
-    if (!ef && !pf) {
+    if (!fields.handle) {
+        handleFeedback.html('Enter your Username too!');
+        hf = true;
+    } else if (!validator.isAscii(fields.handle)) {
+        handleFeedback.html('Oops, please try again');
+        hf = true;
+    } else if (fields.handle.length < 3) {
+        handleFeedback.html('Username too short');
+        hf = true;
+    } else if (fields.handle.length > 10) {
+        handleFeedback.html('Username too long');
+        hf = true;
+    }
+    
+    if (!ef && !pf && !hf) {
         btn.addClass('disabled');
         btnText.html('');
         spinner.removeClass('d-none');
         
-        $.post('/api/auth/login', fields)
+        $.post('/api/auth/signup', fields)
             .done((res) => {
                 if (res.head.code === 200) {
                     if (res.body[ 'auth-token' ]) {
@@ -73,6 +93,12 @@ $('#btnLogin').click(() => {
                 
             })
             .fail((res) => {
+                let call = {
+                    'handle' : [ handle, handleFeedback ],
+                    'email' : [ email, emailFeedback ],
+                    'password' : [ password, passwordFeedback ]
+                };
+                
                 res = res.responseJSON;
                 if (res.head.code === 400) {
                     if (res.head.msg === 'unsupported_client') {
@@ -83,7 +109,7 @@ $('#btnLogin').click(() => {
                     }
                     else if (res.head.msg === 'invalid_request') {
                         if (res.body.tag === 'missing_parameter') {
-                            otherFeedback.html('Login Fields Missing');
+                            otherFeedback.html('SignUp Fields Missing');
                             other.addClass('is-invalid');
                         }
                         else if (res.body.tag === 'invalid_user') {
@@ -91,8 +117,30 @@ $('#btnLogin').click(() => {
                             other.addClass('is-invalid');
                         }
                         else if (res.body.tag === 'missing_parameter') {
-                            otherFeedback.html('Login Fields Missing');
+                            otherFeedback.html('Signup Fields Missing');
                             other.addClass('is-invalid');
+                        }
+                        else if (res.body.tag === 'invalid_parameter') {
+                            call[ res.body.target ][ 0 ].addClass('is-invalid');
+                            call[ res.body.target ][ 1 ].html('Invalid Value')
+                        }
+                        else if (res.body.tag === 'short_param') {
+                            call[ res.body.target ][ 0 ].addClass('is-invalid');
+                            call[ res.body.target ][ 1 ].html('Too Short!')
+                        }
+                        else if (res.body.tag === 'long_param') {
+                            call[ res.body.target ][ 0 ].addClass('is-invalid');
+                            call[ res.body.target ][ 1 ].html('Too Long!')
+                        }
+                        else if (res.body.tag === 'user_exists') {
+                            if (res.body.target === 'handle') {
+                                handleFeedback.html('Username already in use');
+                                handle.addClass('is-invalid');
+                            }
+                            else {
+                                emailFeedback.html('Email already in use');
+                                email.addClass('is-invalid');
+                            }
                         }
                     }
                 }
@@ -102,7 +150,7 @@ $('#btnLogin').click(() => {
                 }
                 
                 btn.removeClass('disabled');
-                btnText.html('Login');
+                btnText.html('SignUp');
                 spinner.addClass('d-none');
             })
             .always(() => {
@@ -111,6 +159,7 @@ $('#btnLogin').click(() => {
     else {
         if (ef) email.addClass('is-invalid');
         if (pf) password.addClass('is-invalid');
+        if (hf) handle.addClass('is-invalid');
     }
     form.addClass('was-validated');
 });

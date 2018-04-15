@@ -9,12 +9,18 @@
 </head>
 <body>
 	<header>
-		<% include ./partials/header.html %>
 	</header>
 	
 	<main>
-		<img src="images/home-banner-1.jpg" class="bg-image opacity-40"/>
+		<img src="/images/home-banner-1.jpg" class="bg-image opacity-40"/>
 		<div class="container">
+			<div class="row text-center text-white">
+				<div class="col-md-4 offset-md-4 col-4 offset-4">
+					<a href="/" class="logoLink">
+						<i class="fa fa-anchor fa-4x"></i>
+					</a>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-4 offset-md-4 col-8 offset-2 mt-5">
 					<div class="card">
@@ -24,16 +30,16 @@
 						<div class="card-body">
 							<form class="form" role="form" id="formLogin" novalidate="novalidate">
 								<div class="form-group">
-									<label for="email" class="card-text">Username</label>
-									<input type="text" class="form-control form-control-lg" name="email"
-									       id="email" required="required" autocomplete="true">
+									<label for="email" class="card-text">Handle</label>
+									<input type="email" class="form-control" name="email"
+									       id="email" required="required" autocomplete="true" placeholder="Username / Email">
 									<div class="invalid-feedback" id="emailFeedback">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="password" class="card-text">Password</label>
-									<input type="password" class="form-control form-control-lg" id="password"
-									       required="required" autocomplete="new-password" name="password">
+									<input type="password" class="form-control" id="password"
+									       required="required" autocomplete="new-password" name="password" placeholder="Password">
 									<div class="invalid-feedback" id="passwordFeedback">
 									</div>
 								</div>
@@ -51,7 +57,7 @@
 								<span class="card-text">
 									New User?
 								</span>
-								<a class="card-link" href="/auth/signup">Sign Up!</a>
+								<a class="card-link" href="/auth/signup">SignUp!</a>
 							</div>
 						</div>
 					</div>
@@ -61,7 +67,6 @@
 	</main>
 	
 	<footer>
-		<% include ./partials/footer.html %>
 	</footer>
 	
 	<% include ./partials/foot.html %>
