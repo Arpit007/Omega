@@ -2,12 +2,12 @@
  * Created by StarkX on 08-Apr-18.
  */
 class DefaultError extends Error {
-    constructor(...reason) {
+    constructor(reason) {
         super();
         this.head = { code : 500, msg : "" };
-        if (reason.length >= 1)
-            this.body = { reason : { tag : 'error', target : reason } };
-        else this.body = { reason : { tag : reason[ 0 ], target : reason[ 1 ], other : reason.slice(2) } };
+        if (reason.length <= 1)
+            this.body = { tag : reason[ 0 ], target : '' };
+        else this.body = { tag : reason[ 0 ], target : reason[ 1 ], other : reason.slice(2) };
     }
 }
 
@@ -113,6 +113,8 @@ class ServerError extends DefaultError {
         else super(reason);
         this.head.code = 503;
         this.head.msg = "server_error";
+        if (xConfig.debugMode)
+            console.log(reason);
     }
 }
 

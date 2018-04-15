@@ -11,7 +11,7 @@ module.exports = function (passport) {
         return User.getUser(emailOrHandle, password)
             .then((user) => {
                 if (!user)
-                    return done(new error.InvalidRequestError('login_msg', 'invalid_user'));
+                    return done(new error.InvalidRequestError('invalid_user'));
                 done(null, user);
             })
             .catch((err) => done(new error.ServerError(err)));

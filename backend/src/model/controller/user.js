@@ -17,20 +17,21 @@ UserSchema.pre('save', function (next) {
             .then((hash) => {
                 user.password = hash
             })
-            .catch((err) => console.log(err))
+            .catch(console.log)
             .then(() => next());
     }
     else return next();
 });
 
-UserSchema.methods.comparePassword = (password) => {
-    return bCrypt.compare(this.local.password, password);
+UserSchema.methods.comparePassword = function (password) {
+    return bCrypt.compare(password, this.password);
 };
 
 UserSchema.statics.getUser = (emailOrHandle, password) => {
     return UserModel
         .findOne({ $or : [ { email : emailOrHandle }, { handle : emailOrHandle } ] })
         .then((user) => {
+            if (!user) return;
             return user.comparePassword(password)
                 .then((isValid) => {
                     if (isValid) return user;
@@ -53,13 +54,19 @@ UserSchema.statics.emailExists = (email) => {
 };
 
 UserSchema.statics.register = (fields) => {
-    let tags = [ "handle", "email", "password" ], opts = {};
-    for (let tag of tags) {
-        if (!(tag in fields))
-            throw new error.InvalidRequestError('missing_parameter', `${tag}`);
-        opts[ tag ] = fields[ tag ].trim();
-    }
+    let opts = {};
     
+    if (!fields)
+        throw new error.InvalidRequestError('invalid_parameter', 'all');
+    if (!fields.handle)
+        throw new error.InvalidRequestError('missing_parameter', 'handle');
+    else opts.handle = fields.handle.trim();
+    if (!fields.email)
+        throw new error.InvalidRequestError('missing_parameter', 'email');
+    else opts.email = fields.email.trim();
+    if (!fields.password)
+        throw new error.InvalidRequestError('missing_parameter', 'password');
+    else opts.password = fields.password;
     if (!validator.isAscii(opts.handle) || validator.isEmail(opts.handle))
         throw new error.InvalidRequestError('invalid_parameter', 'handle');
     if (opts.handle.length < 3)
@@ -74,10 +81,10 @@ UserSchema.statics.register = (fields) => {
     if (opts.password.length > 16)
         throw new error.InvalidRequestError('long_param', 'password');
     
-    if (!validator.isEmail(opts.password))
+    if (!validator.isEmail(opts.email))
         throw new error.InvalidRequestError('invalid_parameter', 'email');
     
-    return Promise.all([ UserSchema.handleExists(opts.handle), UserSchema.emailExists(opts.email) ])
+    return Promise.all([ UserModel.handleExists(opts.handle), UserModel.emailExists(opts.email) ])
         .spread((handleExists, emailExist) => {
             if (handleExists) throw new error.InvalidRequestError("user_exists", 'handle');
             if (emailExist) throw new error.InvalidRequestError("user_exists", 'email');

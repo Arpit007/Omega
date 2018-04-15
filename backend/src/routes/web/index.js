@@ -5,6 +5,12 @@ const express = require('express');
 const router = express.Router();
 const authorise = require('../auth');
 
+const redirectOnLoggedIn = (req, res, next) => {
+    if (req.isAuthenticated())
+        return res.redirect('/home');
+    next();
+};
+
 router.get('/auth/logout', (req, res) => {
     req.session[ 'auth-token' ] = null;
     req.logout();
@@ -18,13 +24,11 @@ router.use((req, res, next) => iPassport.authenticate('jwt', {},
         next();
     })(req, res, next));
 
-router.use('/auth', (req, res, next) => {
-    if (req.isAuthenticated())
-        return res.redirect('/');
-    next();
-}, require('./auth'));
 
-router.get('/app', (req, res) => res.render('app.html', { req : req, title : xConfig.appName }));
-router.get('/', authorise.webAuthorise, (req, res) => res.render('index.html', { req : req, title : xConfig.appName }));
+router.use('/auth', redirectOnLoggedIn, require('./auth'));
+
+router.get('/home', authorise.webAuthorise, (req, res) => res.render('home.html', { req : req, title : xConfig.appName }));
+
+router.get('/', redirectOnLoggedIn, (req, res) => res.render('index.html', { req : req, title : xConfig.appName }));
 
 module.exports = router;

@@ -9,10 +9,25 @@ const Response = require('../../response');
 
 const passport = iPassport;
 
-const validate = (err, req, res, next) => {
-    if (err)
-        return res.status(err.head.code).json(err);
-    if (!req.user){
+const authenticate = (strategy) => {
+    return (req, res, next) => {
+        passport.authenticate(strategy, {
+            failureFlash : true,
+            session : false
+        }, (err, user, info, status) => {
+            if (err) return res.status(err.head.code).json(err);
+            if (info && info.message === 'Missing credentials') {
+                let err = new error.InvalidRequestError('missing_parameter');
+                return res.status(err.head.code).json(err);
+            }
+            req.user = user;
+            next();
+        })(req, res, next);
+    };
+};
+
+const validate = (req, res, next) => {
+    if (!req.user) {
         let err = new error.UnauthorizedClientError('user_not_authenticated');
         return res.status(err.head.code).json(err);
     }
@@ -21,20 +36,19 @@ const validate = (err, req, res, next) => {
 };
 
 const postAuth = (req, res, next) => {
-    Response.ResponseReply(res, 200, xConfig.debugMode ? { 'token' : req.token } : {});
+    Response.ResponseReply(res, 200, xConfig.debugMode ? { 'auth-token' : req.token } : {});
 };
 
-/*************************************************Local Login**********************************************************/
-router.post('/local', passport.authenticate('local-login', {
-    failureFlash : true,
-    session : false
-}), validate, auth.generateApiToken, postAuth);
+router.use((req, res, next) => {
+    if (req.isAuthenticated())
+        return Response.ResponseReply(res, 200, xConfig.debugMode ? { 'auth-token' : req.token } : {});
+    next();
+});
 
+/*************************************************Local Login**********************************************************/
+router.post('/login', authenticate('local-login'), validate, auth.generateApiToken, postAuth);
 
 /*************************************************Local Signup*********************************************************/
-router.post('/signup', passport.authenticate('local-signup', {
-    failureFlash : true,
-    session : false
-}), validate, auth.generateApiToken, postAuth);
+router.post('/signup', authenticate('local-signup'), validate, auth.generateApiToken, postAuth);
 
 module.exports = router;

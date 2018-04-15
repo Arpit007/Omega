@@ -6,7 +6,7 @@ const error = require('../lib/error');
 
 module.exports.apiAuthorise = (req, res, next) => {
     if (!req.isAuthenticated()){
-        let err = new error.UnauthorizedClientError("user_not_authenticated");
+        let err = new error.AccessDeniedError("user_not_authenticated");
         return res.status(err.head.code).json(err);
     }
     next();

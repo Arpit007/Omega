@@ -17,13 +17,10 @@ router.use((req, res, next) => iPassport.authenticate('jwt', { session : false }
         next();
     })(req, res, next));
 
-router.use('/auth', (req, res, next) => {
-    if (req.isAuthenticated())
-        return Response.ResponseReply(res, 200, xConfig.debugMode ? { 'token' : req.token } : {});
-    next();
-}, require('./auth'));
+router.use('/auth', require('./auth'));
 
-router.get('/app', (req, res) => Response.ResponseReply(res, 200, { app : xConfig.appName }));
-router.get('/', authorise.apiAuthorise, (req, res) => Response.ResponseReply(res, 200, { app : xConfig.appName }));
+router.get('/home', authorise.apiAuthorise, (req, res) => Response.ResponseReply(res, 200, { app : xConfig.appName }));
+
+router.get('/', (req, res) => Response.ResponseReply(res, 200, { app : xConfig.appName }));
 
 module.exports = router;
