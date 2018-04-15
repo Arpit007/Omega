@@ -2,25 +2,40 @@
 <html lang="en">
 <head>
 	<% include ./partials/head.html %>
-	<title><%= title %> | <%= xConfig.appName %></title>
+	<title><%= appName %></title>
+	<link href="css/home.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-	
-	<header>
-		<% include ./partials/header.html %>
-	</header>
-	
 	<main>
-		<div class="jumbotron">
-			<h1 class="display-1">
-				OmeGA
-			</h1>
+		
+		<img src="images/home-banner-1.jpg" class="bg-image opacity-40"/>
+		<div class="container-fluid text-white">
+			<div class="row mt-md-5 mt-4 mt-sm-4 pt-5">
+				<div class="col-md-4 offset-md-4 col-4 offset-4 text-center mt-md-0 mt-5 pt-5 pt-md-0">
+					<i class="fa fa-anchor fa-6x mt-xl-5 mt-0"></i>
+				</div>
+			</div>
+			<div class="row mt-md-5 mt-0 mt-sm-2 mt-xl-0">
+				<div class="col-md-4 col-sm-8 offset-md-4 offset-sm-2 text-center mt-0 mt-sm-2">
+					<h3 class="display-3 mt-q mt-md-2"><%= appName %></h3>
+				</div>
+			</div>
+			<div class="row mt-md-5 mt-sm-1 mt-xl-0">
+				<div class="col-md-4 offset-md-4 col-sm-10 offset-sm-1 text-center mt-md-5 mt-sm-3 mt-xl-1">
+					<p class="lead">Connect . Anytime . Anywhere</p>
+				</div>
+			</div>
+			
+			<div class="row mt-2">
+				<div class="col text-center">
+					<a class="btn btn-light" href="/auth/login">
+						<i class="fa fa-sign-in-alt"></i>
+						Login
+					</a>
+				</div>
+			</div>
 		</div>
 	</main>
-	
-	<footer>
-		<% include ./partials/footer.html %>
-	</footer>
 
 </body>
 </html>

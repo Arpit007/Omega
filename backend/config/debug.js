@@ -1,5 +1,5 @@
 module.exports = {
-    "appName" : "Omega: Debug",
+    "appName" : "Omega",
     "port" : 3000,
     "dbConfig" : {
         "url" : "mongodb://localhost:27017",
