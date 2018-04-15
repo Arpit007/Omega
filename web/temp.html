@@ -12,49 +12,101 @@
 	<link href="css/base.css" type="text/css" rel="stylesheet"/>
 	<!--        Partial End         -->
 	
-	<title>Omega: Debug</title>
-	<link href="css/home.css" type="text/css" rel="stylesheet"/>
+	<title>Login | Omega: Debug</title>
+	<link href="css/background.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 	<header>
-			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<a href="#" class="navbar-brand">
-					<span class="fa fa-anchor"></span>
-					Omega: Debug
-				</a>
-				<div class="collapse navbar-collapse" id="collapsibleNavbar">
-					<ul class="navbar-nav mr-4">
-						<li class="nav-item active">
-							<a href="#" class="nav-link">
-								Home
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								Etc
-							</a>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav ml-auto">
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="fa fa-sign-out-alt"></i>
-								Logout</a>
-						</li>
-					</ul>
-				</div>
-			</nav>
-		</header>
+		<!--<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a href="#" class="navbar-brand">
+				<span class="fa fa-anchor"></span>
+				Omega: Debug
+			</a>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav mr-4">
+					<li class="nav-item active">
+						<a href="#" class="nav-link">
+							Home
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							Etc
+						</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav ml-auto">
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="fa fa-sign-out-alt"></i>
+							Logout</a>
+					</li>
+				</ul>
+			</div>
+		</nav>-->
+	</header>
 	
 	<main>
+		<img src="images/home-banner-1.jpg" class="bg-image opacity-40"/>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 offset-md-4 col-8 offset-2 mt-5">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="mb-0">Login</h3>
+						</div>
+						<div class="card-body">
+							<form class="form" role="form" id="formLogin" novalidate="novalidate">
+								<div class="form-group">
+									<label for="email" class="card-text">Username</label>
+									<input type="text" class="form-control form-control-lg" name="email"
+									       id="email" required="required" autocomplete="true">
+									<div class="invalid-feedback" id="emailFeedback">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="card-text">Password</label>
+									<input type="password" class="form-control form-control-lg" id="password"
+									       required="required" autocomplete="new-password" name="password">
+									<div class="invalid-feedback" id="passwordFeedback">
+									</div>
+								</div>
+								<div class="form-group text-center">
+									<input type="hidden" id="other" class="form-control">
+									<div class="invalid-feedback" id="otherFeedback">
+									</div>
+								</div>
+								<div class="btn btn-primary btn-block float-right card-text" id="btnLogin">
+									<span id="text">Login</span>
+									<i class="fa d-none fa-spinner fa-spin" id="loginSpinner"></i>
+								</div>
+							</form>
+							<div class="pt-5 text-center text-muted small">
+								<span class="card-text">
+									New User?
+								</span>
+									<a class="card-link" href="/auth/signup">Sign Up!</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
 	
 	<footer>
-		<p class="text-center text-muted">© Copyright 2018 Omega: Debug</p>
+		<!--<p class="text-center text-muted">© Copyright 2018 Omega: Debug</p>-->
 	</footer>
+	
+	<script src="js/jquery/jquery.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+	
+	
+	<script src="js/validator.min.js" type="text/javascript"></script>
+	<script src="js/login.js" type="text/javascript"></script>
 
 </body>
 </html>

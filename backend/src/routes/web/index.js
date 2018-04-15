@@ -27,8 +27,18 @@ router.use((req, res, next) => iPassport.authenticate('jwt', {},
 
 router.use('/auth', redirectOnLoggedIn, require('./auth'));
 
-router.get('/home', authorise.webAuthorise, (req, res) => res.render('home.html', { req : req, title : xConfig.appName }));
+router.get('/home', authorise.webAuthorise, (req, res) => res.render('home.html', {
+    req : req,
+    title : xConfig.appName
+}));
 
 router.get('/', redirectOnLoggedIn, (req, res) => res.render('index.html', { req : req, title : xConfig.appName }));
+
+router.get('/onLogin', authorise.webAuthorise, (req, res) => {
+    if (req.user) {
+        req.session[ 'auth-token' ] = req.token;
+        res.redirect('/home');
+    } else res.redirect('/auth/login');
+});
 
 module.exports = router;

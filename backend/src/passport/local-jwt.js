@@ -7,9 +7,16 @@ const User = require('mongoose').model('User');
 const opts = {
     secretOrKey : xConfig.crypto.JwtKey,
     jwtFromRequest : (req) => {
-        if (req.headers[ 'x-auth-token' ]) return req.headers[ 'x-auth-token' ];
-        //return (req.cookies) ? req.cookies[ 'auth-token' ] : null;
-        return req.session[ 'auth-token' ];
+        let token = (() => {
+            if (req.headers[ 'x-auth-token' ]) return req.headers[ 'x-auth-token' ];
+            if (req.session[ 'auth-token' ]) return req.session[ 'auth-token' ];
+            if (req.body[ 'auth-token' ]) return req.body[ 'auth-token' ];
+            if (req.query[ 'auth-token' ]) return req.query[ 'auth-token' ];
+            //return (req.cookies) ? req.cookies[ 'auth-token' ] : null;
+            return req.session[ 'auth-token' ];
+        })();
+        req.token = token;
+        return token;
     }
 };
 
