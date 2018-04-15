@@ -66,6 +66,11 @@ app.use(flash());
  multiples: true
  }));*/
 
+app.use((req, res, next)=>{
+   res.locals.appName = xConfig.appName;
+   next();
+});
+
 app.use('/', index);
 
 app.use(function (req, res, next) {
@@ -75,10 +80,11 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
+    res.locals.title = 'Error';
     res.locals.message = err.message;
     res.locals.error = xConfig.debugMode ? err : {};
     res.status(err.status || 500);
-    res.render('error.ejs');
+    res.render('error.html');
 });
 
 module.exports = app;
