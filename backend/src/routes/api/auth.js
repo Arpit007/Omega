@@ -6,6 +6,8 @@ const router = express.Router();
 const auth = require('../../passport/jwt');
 const error = require('../../lib/error');
 const Response = require('../../response');
+const mongoose = require('mongoose');
+const activeUsers = require('../../lib/activeUsers');
 
 const passport = iPassport;
 
@@ -39,6 +41,28 @@ const postAuth = (req, res, next) => {
     Response.ResponseReply(res, 200, xConfig.debugMode ? { 'auth-token' : req.token } : {});
 };
 
+
+router.post('/deviceLogout', (req, res) => {
+    let deviceModel = mongoose.model('Device');
+    return deviceModel.getDeviceByToken(req.token)
+        .then((device) => {
+            if (!device) return Response.ResponseReply(res);
+            req.user.devices.splice(req.user.devices.indexOf(device._id), 1);
+            
+            device.download.forEach((download) => {
+                /*Todo: Delete Downloaded Files*/
+            });
+            return device.remove();
+        })
+        .then(() => req.user.save())
+        .then(() => req.logout())
+        .then(() => Response.ResponseReply(res))
+        .catch((e) => {
+            e = new error.ServerError(e);
+            res.status(e.head.code).json(e);
+        });
+});
+
 router.use((req, res, next) => {
     if (req.isAuthenticated())
         return Response.ResponseReply(res, 200, xConfig.debugMode ? { 'auth-token' : req.token } : {});
@@ -50,5 +74,20 @@ router.post('/login', authenticate('local-login'), validate, auth.generateApiTok
 
 /*************************************************Local Signup*********************************************************/
 router.post('/signup', authenticate('local-signup'), validate, auth.generateApiToken, postAuth);
+
+router.post('/deviceLogin', authenticate('local-login'), validate, auth.generateApiToken, (req, res, next) => {
+    let deviceModel = mongoose.model('Device');
+    return deviceModel.login(req.user, req.token)
+        .then((device) => {
+            req.user.devices.push(device._id);
+            activeUsers.addDevice(req.user, device);
+            return req.user.save();
+        })
+        .then(() => next())
+        .catch((e) => {
+            e = new error.ServerError(e);
+            res.status(e.head.code).json(e);
+        });
+}, postAuth);
 
 module.exports = router;

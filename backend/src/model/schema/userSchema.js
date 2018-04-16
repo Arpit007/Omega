@@ -8,9 +8,10 @@ const ObjectId = Schema.Types.ObjectId;
 let mongooseHidden = require('mongoose-hidden')();
 
 const UserSchema = new Schema({
-    handle : { type : String, trim : true, required : true, unique: true },
-    email : { type : String, trim : true, required : true, unique : true},
-    password : { type : String, required : true, hideJSON : true }
+    handle : { type : String, trim : true, required : true, unique : true },
+    email : { type : String, trim : true, required : true, unique : true },
+    password : { type : String, required : true, hideJSON : true },
+    devices : [ { type : ObjectId, ref : 'Device' } ]
 });
 
 UserSchema.plugin(mongooseHidden);

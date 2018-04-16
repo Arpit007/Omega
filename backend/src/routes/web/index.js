@@ -14,7 +14,7 @@ const redirectOnLoggedIn = (req, res, next) => {
 router.get('/auth/logout', (req, res) => {
     req.session[ 'auth-token' ] = null;
     req.logout();
-    res.redirect('/auth/login');
+    res.redirect('/');
 });
 
 router.use((req, res, next) => iPassport.authenticate('jwt', {},
@@ -32,7 +32,7 @@ router.get('/home', authorise.webAuthorise, (req, res) => res.render('home.html'
     title : xConfig.appName
 }));
 
-router.get('/', redirectOnLoggedIn, (req, res) => res.render('index.html', { req : req, title : xConfig.appName }));
+router.get('/', (req, res) => res.render('index.html', { req : req }));
 
 router.get('/onAuth', authorise.webAuthorise, (req, res) => {
     if (req.user) {

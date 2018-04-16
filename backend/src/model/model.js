@@ -3,5 +3,8 @@
  */
 
 module.exports = global.Model = {
-    User : require('./controller/user')
+    User : require('./controller/user'),
+    Download : require('./controller/download'),
+    File : require('./controller/file'),
+    Device : require('./controller/device')
 };
