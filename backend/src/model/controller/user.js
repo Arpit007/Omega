@@ -96,4 +96,8 @@ UserSchema.statics.register = (fields) => {
         });
 };
 
+UserSchema.statics.getUserById = (userId) => {
+    return UserModel.findOne({ _id : userId });
+};
+
 module.exports = UserModel = mongoose.model('User', UserSchema);

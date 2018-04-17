@@ -26,7 +26,6 @@ if (!xConfig.debugMode)
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', cons.ejs);
 app.set('view engine', 'html');
-
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 const corsOption = {
     origin : true,
@@ -66,9 +65,9 @@ app.use(flash());
  multiples: true
  }));*/
 
-app.use((req, res, next)=>{
-   res.locals.appName = xConfig.appName;
-   next();
+app.use((req, res, next) => {
+    res.locals.appName = xConfig.appName;
+    next();
 });
 
 app.use('/', index);

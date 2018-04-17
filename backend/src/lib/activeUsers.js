@@ -18,16 +18,16 @@ class ActiveUsers {
         user[ 'clients' ].forEach((client) => client.emit('addDevice', device.toJSON()));
     }
     
-    liveDevice(user, device, socket) {
-        socket.userId = user._id;
-        user = this.getUser(user._id);
-        socket.deviceId = device._id;
+    liveDevice(userId, deviceId, socket) {
+        socket.userId = userId;
+        let user = this.getUser(userId);
+        socket.deviceId = deviceId;
         user[ 'devices' ].push(socket);
         user[ 'clients' ].forEach((client) => client.emit('liveDevice', { Id : socket.deviceId }));
     }
     
     offlineDevice(socket) {
-        user = this.getUser(socket.userId);
+        let user = this.getUser(socket.userId);
         if (!user[ 'devices' ].includes(socket))
             return;
         user[ 'devices' ].splice(user[ 'devices' ].indexOf(socket), 1);
@@ -36,11 +36,11 @@ class ActiveUsers {
             delete this.list[ socket.userId ];
     }
     
-    addClient(user, socket) {
+    addClient(userId, socket) {
         socket.userId = user._id;
         user = this.getUser(socket.userId);
         if (!user[ 'clients' ].includes(socket))
-            user['clients'].push(socket);
+            user[ 'clients' ].push(socket);
     }
     
     offlineUser(socket) {

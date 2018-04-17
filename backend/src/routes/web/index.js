@@ -38,7 +38,10 @@ router.get('/onAuth', authorise.webAuthorise, (req, res) => {
     if (req.user) {
         req.session[ 'auth-token' ] = req.token;
         res.redirect('/home');
-    } else res.redirect('/auth/login');
+    } else {
+        delete req.session[ 'auth-token' ];
+        res.redirect('/auth/login');
+    }
 });
 
 module.exports = router;
