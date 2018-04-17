@@ -1,9 +1,7 @@
 package com.starkx.arpit.omega.UI;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +9,7 @@ import android.widget.Toast;
 
 import com.starkx.arpit.omega.R;
 
-public class Url extends AppCompatActivity {
-	SharedPreferences preferences;
+public class Url extends BaseActivity {
 	EditText url;
 	Button update;
 
@@ -29,8 +26,7 @@ public class Url extends AppCompatActivity {
 	}
 
 	void fetchUrl() {
-		preferences = getSharedPreferences("app", MODE_PRIVATE);
-		String currentUrl = preferences.getString("url", "");
+		String currentUrl = getUrl();
 		if (currentUrl.isEmpty()) {
 			update.setText(R.string.setUrl);
 		}
@@ -46,12 +42,10 @@ public class Url extends AppCompatActivity {
 					Toast.makeText(Url.this, "Enter Url First", Toast.LENGTH_SHORT).show();
 				}
 				else {
-					SharedPreferences.Editor editor = preferences.edit();
-					editor.putString("url", newUrl);
-					editor.apply();
-					Toast.makeText(getApplicationContext(), "Url Updated Successfully", Toast.LENGTH_LONG).show();
+					getConfig().saveUrl(getApplicationContext(), newUrl);
+					Toast.makeText(getApplicationContext(), "Url Updated Successfully", Toast.LENGTH_SHORT).show();
 					Intent intent;
-					if (preferences.getString("access-token", "").isEmpty()) {
+					if (getToken().isEmpty()) {
 						intent = new Intent(Url.this, Login.class);
 					}
 					else {

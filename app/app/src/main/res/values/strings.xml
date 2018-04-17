@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Omega</string>
     <string name="setUrl">Set Url</string>
+
+
+    <string name="deviceLogin">/api/auth/deviceLogin</string>
 </resources>

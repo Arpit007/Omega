@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.starkx.arpit.omega.R;
 import com.starkx.arpit.omega.Util.Permission;
 
-public class Splash extends AppCompatActivity {
+public class Splash extends BaseActivity {
 	private static final int PermissionRequest = 100;
 
 	@Override
