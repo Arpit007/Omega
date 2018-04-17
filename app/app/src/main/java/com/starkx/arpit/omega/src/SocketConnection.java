@@ -1,14 +1,16 @@
 package com.starkx.arpit.omega.src;
 
 
-import android.util.Log;
-
 import com.starkx.arpit.omega.App;
 import com.starkx.arpit.omega.R;
 import com.starkx.arpit.omega.Util.Config;
 
+import org.json.JSONObject;
+
+import java.net.URI;
+
 import io.socket.client.Ack;
-import io.socket.client.IO;
+import io.socket.client.Manager;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
@@ -19,13 +21,13 @@ public class SocketConnection {
 	private Boolean unAuthorized = false;
 	private SocketEvent Connect = null;
 	private SocketEvent Disconnect = null;
-	private SocketEvent unAuthorizedEvent = null;
+	private SocketEvent UnAuthorisedEvent = null;
 	private String Url;
 
 	private SocketConnection() {
 		socketConnection = this;
 		Route = App.getInstance().getApplicationContext().getString(R.string.socket);
-		Url = Config.getConfig(App.getInstance().getApplicationContext()).getUrl() + Route;
+		Url = Config.getConfig(App.getInstance().getApplicationContext()).getUrl();
 	}
 
 	public static synchronized SocketConnection getInstance() {
@@ -41,23 +43,24 @@ public class SocketConnection {
 			if (token.isEmpty()) {
 				return;
 			}
-			socket = IO.socket(Url);
+			Manager manager = new Manager(new URI(Url));
+			socket = manager.socket(Route);
+			socket.connect();
 			socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 				@Override
 				public void call(Object... args) {
 					try {
-						if (Connect != null) {
-							Connect.onEventRaised(socket, null);
-						}
-						socket.emit("verify", String.format("{\"auth-token\":%s}", token), new Ack() {
+						socket.once("authenticate", new Emitter.Listener() {
 							@Override
 							public void call(Object... args) {
-								Log.d("", "");
-								unAuthorized = false;
-								if (unAuthorized && unAuthorizedEvent != null) {
-									unAuthorizedEvent.onEventRaised(socket, null);
+								try {
+									String data = "{auth-token:" + token + "}";
+									Ack ack = (Ack) args[0];
+									ack.call(new JSONObject(data));
 								}
-								SocketRegister.getInstance().registerSocketEvents();
+								catch (Exception e) {
+									e.printStackTrace();
+								}
 							}
 						});
 					}
@@ -70,6 +73,23 @@ public class SocketConnection {
 				public void call(Object... args) {
 					if (Disconnect != null) {
 						Disconnect.onEventRaised(socket, null);
+					}
+				}
+			}).on("authenticated", new Emitter.Listener() {
+				@Override
+				public void call(Object... args) {
+					SocketRegister.getInstance().registerSocketEvents();
+					if (Connect != null) {
+						Connect.onEventRaised(socket, null);
+					}
+				}
+			}).on("unauthorised", new Emitter.Listener() {
+				@Override
+				public void call(Object... args) {
+					unAuthorized = true;
+					socket.close();
+					if (UnAuthorisedEvent != null) {
+						UnAuthorisedEvent.onEventRaised(socket, null);
 					}
 				}
 			});
@@ -114,8 +134,8 @@ public class SocketConnection {
 		Disconnect = event;
 	}
 
-	public void setOnUnAuthoeizedListener(SocketEvent event) {
-		unAuthorizedEvent = event;
+	public void setOnUnAuthorisedEventListener(SocketEvent event) {
+		UnAuthorisedEvent = event;
 	}
 
 	public boolean isConnected() {
@@ -123,7 +143,7 @@ public class SocketConnection {
 	}
 
 	public void reAuthorisedReconnect() {
-		Url = Config.getConfig(App.getInstance().getApplicationContext()).getUrl() + Route;
+		Url = Config.getConfig(App.getInstance().getApplicationContext()).getUrl();
 		unAuthorized = false;
 		reconnect();
 	}

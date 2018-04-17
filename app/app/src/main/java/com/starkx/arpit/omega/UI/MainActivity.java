@@ -51,9 +51,10 @@ public class MainActivity extends BaseActivity {
 			}
 		});
 
-		SocketConnection.getInstance().setOnUnAuthoeizedListener(new SocketEvent() {
+		SocketConnection.getInstance().setOnUnAuthorisedEventListener(new SocketEvent() {
 			@Override
 			public void onEventRaised(Socket socket, Object[] Data) {
+				showShortMessage("Please Login Again");
 				Intent intent = new Intent(MainActivity.this, Login.class);
 				startActivity(intent);
 				finish();
