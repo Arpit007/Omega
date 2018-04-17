@@ -1,13 +1,15 @@
-package com.starkx.arpit.omega;
+package com.starkx.arpit.omega.UI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Splash extends AppCompatActivity {
+import com.starkx.arpit.omega.R;
+
+public class Url extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_splash);
+		setContentView(R.layout.activity_url);
 	}
 }
