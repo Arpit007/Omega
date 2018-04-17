@@ -1,10 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
     tools:context=".UI.Url">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_weight="30"
+        android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/Icon"
+            android:src="@drawable/ic_anchor"
+            android:layout_centerInParent="true"
+            android:layout_width="100dp" android:layout_height="100dp"/>
+
+        <TextView
+            android:textSize="32sp"
+            android:textColor="#fff"
+            android:layout_below="@id/Icon"
+            android:text="@string/app_name"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight="70"
+        android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/newUrl"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textColorHint="#eee"
+            android:hint="Omega Server Url"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/update"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:background="#007bff"
+            android:textAllCaps="false"
+            android:text="Update"
+            android:layout_margin="10dp"
+            android:layout_below="@id/newUrl"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
