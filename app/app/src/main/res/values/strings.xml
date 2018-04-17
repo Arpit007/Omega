@@ -4,4 +4,7 @@
 
 
     <string name="deviceLogin">/api/auth/deviceLogin</string>
+    <string name="Connected">Connected</string>
+    <string name="Disconnected">Disconnected</string>
+    <string name="socket">/device</string>
 </resources>

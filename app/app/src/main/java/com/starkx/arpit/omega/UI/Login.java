@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.starkx.arpit.omega.R;
 import com.starkx.arpit.omega.Util.JRequest;
+import com.starkx.arpit.omega.src.SocketConnection;
 
 import org.json.JSONObject;
 
@@ -62,8 +63,9 @@ public class Login extends BaseActivity {
 						public void onResponse(JSONObject response) {
 							try {
 								String authToken = response.getJSONObject("body").getString("auth-token");
-								getConfig().saveUrl(getApplicationContext(), authToken);
+								getConfig().saveToken(getApplicationContext(), authToken);
 								showShortMessage("Success");
+								SocketConnection.getInstance().reAuthorisedReconnect();
 								Intent intent = new Intent(Login.this, MainActivity.class);
 								startActivity(intent);
 								finish();

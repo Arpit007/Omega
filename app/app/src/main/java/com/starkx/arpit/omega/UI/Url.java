@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.starkx.arpit.omega.R;
+import com.starkx.arpit.omega.src.SocketConnection;
 
 public class Url extends BaseActivity {
 	EditText url;
@@ -37,12 +38,13 @@ public class Url extends BaseActivity {
 		update.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				String newUrl = url.getText().toString();
+				String newUrl = url.getText().toString().trim();
 				if (newUrl.isEmpty()) {
 					Toast.makeText(Url.this, "Enter Url First", Toast.LENGTH_SHORT).show();
 				}
 				else {
 					getConfig().saveUrl(getApplicationContext(), newUrl);
+					SocketConnection.getInstance().reAuthorisedReconnect();
 					Toast.makeText(getApplicationContext(), "Url Updated Successfully", Toast.LENGTH_SHORT).show();
 					Intent intent;
 					if (getToken().isEmpty()) {
