@@ -18,7 +18,7 @@ import com.starkx.arpit.omega.src.SocketConnection;
 import org.json.JSONObject;
 
 public class Login extends BaseActivity {
-	EditText password, handle;
+	EditText password, handle, name;
 	Button login;
 
 	@Override
@@ -31,6 +31,7 @@ public class Login extends BaseActivity {
 	void bindViews() {
 		password = findViewById(R.id.password);
 		handle = findViewById(R.id.handle);
+		name = findViewById(R.id.name);
 		login = findViewById(R.id.login);
 
 		login.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +39,7 @@ public class Login extends BaseActivity {
 			public void onClick(View view) {
 				String userHandle = handle.getText().toString().trim();
 				String userPassword = password.getText().toString();
+				String deviceName = name.getText().toString().trim();
 
 				if (userHandle.isEmpty()) {
 					showShortMessage("User Handle Missing");
@@ -45,6 +47,10 @@ public class Login extends BaseActivity {
 				}
 				else if (userPassword.isEmpty()) {
 					showShortMessage("Password Required");
+					return;
+				}
+				else if (deviceName.isEmpty()) {
+					showShortMessage("Device Name Required");
 					return;
 				}
 
@@ -55,6 +61,7 @@ public class Login extends BaseActivity {
 					JSONObject body = new JSONObject();
 					body.put("email", userHandle);
 					body.put("password", userPassword);
+					body.put("name", deviceName);
 
 					showProgress();
 

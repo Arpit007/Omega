@@ -31,7 +31,7 @@ public class FileExplorer {
 				mFile.path = "/storage/" + mFile.path.substring(mFile.path.lastIndexOf("/") + 1);
 			}
 
-			file.files.add(mFile);
+			file.files.put(mFile.path, mFile);
 		}
 		return gson.toJson(file);
 	}
@@ -47,7 +47,7 @@ public class FileExplorer {
 			for (File cFile : tFile.listFiles()) {
 				MFile mFile = new MFile(cFile.getName(), cFile.getCanonicalPath(),
 						cFile.isFile(), cFile.isDirectory(), cFile.isHidden());
-				file.files.add(mFile);
+				file.files.put(mFile.path, mFile);
 			}
 			return gson.toJson(file);
 		}

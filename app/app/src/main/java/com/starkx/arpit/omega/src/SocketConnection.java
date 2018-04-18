@@ -78,7 +78,7 @@ public class SocketConnection {
 			}).on("authenticated", new Emitter.Listener() {
 				@Override
 				public void call(Object... args) {
-					SocketRegister.getInstance().registerSocketEvents();
+					SocketRegister.getInstance().registerEvents();
 					if (Connect != null) {
 						Connect.onEventRaised(socket, null);
 					}
@@ -88,9 +88,10 @@ public class SocketConnection {
 				public void call(Object... args) {
 					unAuthorized = true;
 					socket.close();
-					if (UnAuthorisedEvent != null) {
+					try{
 						UnAuthorisedEvent.onEventRaised(socket, null);
 					}
+					catch (Exception e){}
 				}
 			});
 			socket.connect();

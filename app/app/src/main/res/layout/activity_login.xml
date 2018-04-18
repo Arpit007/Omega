@@ -56,11 +56,23 @@
             android:textAlignment="center"
             android:textColor="#ffffff" android:textColorHint="#eee"/>
 
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:inputType="textCapWords"
+            android:hint="Device Name"
+            android:textAlignment="center"
+            android:textColor="#ffffff" android:textColorHint="#eee"/>
+
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/password"
+            android:layout_below="@id/name"
             android:layout_margin="10dp"
             android:background="#007bff"
             android:text="Log In"

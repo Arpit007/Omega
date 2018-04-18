@@ -40,12 +40,12 @@ public class Url extends BaseActivity {
 			public void onClick(View view) {
 				String newUrl = url.getText().toString().trim();
 				if (newUrl.isEmpty()) {
-					Toast.makeText(Url.this, "Enter Url First", Toast.LENGTH_SHORT).show();
+					showShortMessage("Enter Url First");
 				}
 				else {
 					getConfig().saveUrl(getApplicationContext(), newUrl);
 					SocketConnection.getInstance().reAuthorisedReconnect();
-					Toast.makeText(getApplicationContext(), "Url Updated Successfully", Toast.LENGTH_SHORT).show();
+					showShortMessage("Url Updated Successfully");
 					Intent intent;
 					if (getToken().isEmpty()) {
 						intent = new Intent(Url.this, Login.class);
