@@ -19,10 +19,11 @@ DeviceSchema.statics.getDeviceById = (deviceId) => {
     return DeviceModel.findOne({ _id : deviceId });
 };
 
-DeviceSchema.statics.login = (user, accessToken) => {
+DeviceSchema.statics.login = (user, accessToken, name) => {
     return DeviceModel.create({
         userId : user._id,
-        accessToken : accessToken
+        accessToken : accessToken,
+        name : name
     });
 };
 

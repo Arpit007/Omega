@@ -132,3 +132,11 @@ main{
 	height: 100vh;
 	width: 100vh;
 }
+
+.live{
+	color: #34ce57;
+}
+
+.offline{
+	color: transparent;
+}

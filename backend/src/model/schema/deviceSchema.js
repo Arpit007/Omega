@@ -8,8 +8,9 @@ const ObjectId = Schema.Types.ObjectId;
 let mongooseHidden = require('mongoose-hidden')();
 
 const deviceSchema = new Schema({
-    userId : { type : ObjectId, ref : 'User', required : true },
-    accessToken : { type : String, unique : true },
+    name : String,
+    userId : { type : ObjectId, ref : 'User', required : true, hideJSON : true },
+    accessToken : { type : String, unique : true, hideJSON : true },
     download : [ { type : ObjectId, ref : 'Download' } ],
     pin : [ { type : ObjectId, ref : 'File' } ],
     lastActive : { type : Date, default : new Date() }

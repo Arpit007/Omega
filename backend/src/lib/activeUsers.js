@@ -9,19 +9,22 @@ class ActiveUsers {
     
     getUser(id) {
         if (!(id in this.list))
+        //Todo:Make dictionary
             this.list[ id ] = { clients : [], devices : [] };
         return this.list[ id ];
     }
     
     addDevice(user, device) {
         user = this.getUser(user._id);
-        user[ 'clients' ].forEach((client) => client.emit('addDevice', device.toJSON()));
+        let temp = device.toJSON();
+        temp.Id = device.Id;
+        user[ 'clients' ].forEach((client) => client.emit('addDevice', temp));
     }
     
     liveDevice(userId, deviceId, socket) {
-        socket.userId = userId;
+        socket.userId = String(userId);
         let user = this.getUser(userId);
-        socket.deviceId = deviceId;
+        socket.deviceId = String(deviceId);
         user[ 'devices' ].push(socket);
         user[ 'clients' ].forEach((client) => client.emit('liveDevice', { Id : socket.deviceId }));
     }
@@ -37,20 +40,38 @@ class ActiveUsers {
     }
     
     addClient(userId, socket) {
-        socket.userId = user._id;
-        user = this.getUser(socket.userId);
+        socket.userId = String(userId);
+        let user = this.getUser(socket.userId);
         if (!user[ 'clients' ].includes(socket))
             user[ 'clients' ].push(socket);
     }
     
     offlineUser(socket) {
-        user = this.getUser(socket.userId);
+        let user = this.getUser(socket.userId);
         if (!user[ 'clients' ].includes(socket))
             return;
         user[ 'clients' ].splice(user[ 'clients' ].indexOf(socket), 1);
         if (user[ 'clients' ].length === 0 && user[ 'devices' ].length === 0)
             delete this.list[ socket.userId ];
     }
+    
+    getLiveDevice(userId) {
+        let list = [];
+        let user = this.getUser(userId);
+        for (let device of user.devices)
+            list.push(device.deviceId);
+        return list;
+    }
+    
+    getDeviceSocket(userId, deviceId) {
+        let user = this.getUser(userId);
+        for (let socket of user.devices) {
+            if (socket.deviceId === deviceId)
+                return socket;
+        }
+    }
+    
+    //TOdo: Logout
 }
 
-const activeUsers = module.exports = new ActiveUsers();
+module.exports = new ActiveUsers();

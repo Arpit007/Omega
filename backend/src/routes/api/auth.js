@@ -77,7 +77,7 @@ router.post('/signup', authenticate('local-signup'), validate, auth.generateApiT
 
 router.post('/deviceLogin', authenticate('local-login'), validate, auth.generateApiToken, (req, res, next) => {
     let deviceModel = mongoose.model('Device');
-    return deviceModel.login(req.user, req.token)
+    return deviceModel.login(req.user, req.token, req.body.name)
         .then((device) => {
             req.user.devices.push(device._id);
             activeUsers.addDevice(req.user, device);

@@ -154,41 +154,11 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2 col-xs-1 pl-0 pr-0 bg-dark" id="sidebar">
-				<div class="list-group panel">
-					<a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar"
-					   aria-expanded="false">
-						<i class="fa fa-mobile-alt pr-2"></i>
-						Device 1
-					</a>
-					<div class="collapse" id="menu1">
-						<a href="#" class="list-group-item" data-parent="#menu1">Pin 1</a>
-						<a href="#" class="list-group-item" data-parent="#menu1">Pin 2</a>
-						
-						<a href="#menu1sub" class="list-group-item" data-toggle="collapse" aria-expanded="false">
-							Available</a>
-						<div class="collapse" id="menu1sub">
-							<a href="#" class="list-group-item" data-parent="#menu1sub">File 1</a>
-							<a href="#" class="list-group-item" data-parent="#menu1sub">File 2</a>
-						</div>
-					</div>
-					<a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar"
-					   aria-expanded="false">
-						<i class="fa fa-mobile-alt pr-2"></i>
-						Device 2
-					</a>
-					<div class="collapse" id="menu2">
-						
-						<a href="#menu2sub" class="list-group-item" data-toggle="collapse" aria-expanded="false">
-							Available</a>
-						<div class="collapse" id="menu2sub">
-							<a href="#" class="list-group-item" data-parent="#menu2sub">File 1</a>
-							<a href="#" class="list-group-item" data-parent="#menu2sub">File 2</a>
-						</div>
-					</div>
+				<div class="list-group panel" id="menuPanel">
 				</div>
 			</div>
 			<main class="col-md-10 col-xs-11">
-				<div class="overlay align-items-center text-center" id="loader">
+				<div class="overlay align-items-center text-center" hidden id="loader">
 					<i class="fa fa-spinner fa-pulse fa-3x text-white"></i>
 				</div>
 				<div class="page-header">
@@ -204,13 +174,38 @@
 		<!--<p class="text-center text-muted">© Copyright 2018 Omega: Debug</p>-->
 	</footer>
 	
+	<div hidden>
+		<div id="__genericHolder__" class="menuLabel">
+			<a href="#__genericMenu__" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar"
+			   aria-expanded="false">
+				<i id="__genericStatus__" class="fa fa-circle pr-2 offline"></i>
+				<i class="fa fa-mobile-alt pr-2"></i>
+				__genericName__
+			</a>
+			<div class="collapse" id="__genericMenu__">
+				<a href="#" class="list-group-item pinItem" data-parent="#__genericMenu__">__genericFile__</a>
+				
+				<a href="#__genericSubMenu__" class="list-group-item" data-toggle="collapse" aria-expanded="false">
+					Available</a>
+				<div class="collapse subMenu" id="__genericSubMenu__">
+					<a href="#" class="list-group-item downItem" data-parent="#__genericSubMenu__">__genericFile__</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<footer>
+		<!--<p class="text-center text-muted">© Copyright 2018 Omega: Debug</p>-->
+	</footer>
+	
 	<script src="js/jquery/jquery.min.js" type="text/javascript"></script>
 	<script src="js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
 	
-	
+	<script src="socket.io/socket.io.js" type="text/javascript"></script>
 	<script src="js/validator.min.js" type="text/javascript"></script>
-	<script src="js/home.js" type="text/javascript"></script>
 	<script data-main="js/logic" src="js/require.js"></script>
+	<script src="js/home.js" type="text/javascript"></script>
 
 </body>
 </html>
