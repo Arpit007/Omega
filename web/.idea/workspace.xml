@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95e401e9-ca87-41bc-b788-58edfad8d3d7" name="Default" comment="Index Page">
-      <change afterPath="$PROJECT_DIR$/socket.io/socket.io.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/lib/activeUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/lib/activeUsers.js" afterDir="false" />
+    <list default="true" id="95e401e9-ca87-41bc-b788-58edfad8d3d7" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/src/lib/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/lib/socket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/src/model/controller/device.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/model/controller/device.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/model/schema/deviceSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/model/schema/deviceSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/routes/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/home1.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/deviceList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/deviceList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/logic.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/logic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp.html" beforeDir="false" afterPath="$PROJECT_DIR$/temp.html" afterDir="false" />
     </list>
@@ -30,57 +25,58 @@
       <file leaf-file-name="temp.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/temp.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1462">
-              <caret line="207" column="61" selection-start-line="207" selection-start-column="61" selection-end-line="207" selection-end-column="61" />
+            <state relative-caret-position="170">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding>
                 <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="e#4933#9289#0" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/home.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logic.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/logic.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="81" column="3" selection-start-line="81" selection-start-column="3" selection-end-line="81" selection-end-column="3" />
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-                <element signature="e#69#791#0" expanded="true" />
-                <element signature="e#326#1320#0" expanded="true" />
-                <element signature="e#1367#2461#0" expanded="true" />
-                <element signature="e#1416#1726#0" expanded="true" />
-                <element signature="e#2137#2453#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/home.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="141" column="1" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
+            <state relative-caret-position="272">
+              <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/login.js">
+      <file leaf-file-name="logic.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/logic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1071">
-              <caret line="65" column="39" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="39" />
+            <state relative-caret-position="493">
+              <caret line="126" column="3" selection-start-line="126" selection-start-column="3" selection-end-line="126" selection-end-column="3" />
               <folding>
-                <element signature="e#2468#4015#0" expanded="true" />
+                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#69#3576#0" expanded="true" />
+                <element signature="e#326#1320#0" expanded="true" />
+                <element signature="e#1367#3573#0" expanded="true" />
+                <element signature="e#1416#1726#0" expanded="true" />
+                <element signature="e#3055#3565#0" expanded="true" />
+                <element signature="e#3615#3752#0" expanded="true" />
+                <element signature="e#3803#3939#0" expanded="true" />
+                <element signature="e#3990#4127#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deviceList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/deviceList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="309" column="3" selection-start-line="309" selection-start-column="3" selection-end-line="309" selection-end-column="3" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#69#6100#0" expanded="true" />
+                <element signature="e#3422#3588#0" expanded="true" />
+                <element signature="e#3620#3790#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,10 +129,11 @@
         <option value="$PROJECT_DIR$/css/home1.css" />
         <option value="$PROJECT_DIR$/js/home.js" />
         <option value="$PROJECT_DIR$/temp1.html" />
-        <option value="$PROJECT_DIR$/home.html" />
-        <option value="$PROJECT_DIR$/temp.html" />
-        <option value="$PROJECT_DIR$/js/logic.js" />
         <option value="$PROJECT_DIR$/css/home.css" />
+        <option value="$PROJECT_DIR$/js/deviceList.js" />
+        <option value="$PROJECT_DIR$/temp.html" />
+        <option value="$PROJECT_DIR$/home.html" />
+        <option value="$PROJECT_DIR$/js/logic.js" />
       </list>
     </option>
   </component>
@@ -206,8 +203,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\App\Omega\web\socket.io" />
       <recent name="D:\App\Omega\web\js" />
+      <recent name="D:\App\Omega\web\socket.io" />
       <recent name="D:\App\Omega\web\css" />
       <recent name="D:\App\Omega\web\images" />
       <recent name="D:\App\Omega\web" />
@@ -260,7 +257,7 @@
       <workItem from="1523986797608" duration="1266000" />
       <workItem from="1524030220397" duration="775000" />
       <workItem from="1524053317812" duration="703000" />
-      <workItem from="1524073493763" duration="85000" />
+      <workItem from="1524073493763" duration="10042000" />
     </task>
     <task id="LOCAL-00001" summary="Renamed README.md">
       <created>1523775902689</created>
@@ -290,26 +287,33 @@
       <option name="project" value="LOCAL" />
       <updated>1523804912561</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Device Integration">
+      <created>1524073653993</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524073653993</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54781000" />
+    <option name="totallyTimeSpent" value="64738000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="676" y="0" width="697" height="735" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.4673748" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23520486" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32933104" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5014881" side_tool="true" weight="0.38593483" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3292683" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3292683" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.38850173" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4985119" weight="0.39198607" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -329,7 +333,8 @@
     <MESSAGE value="Renamed README.md" />
     <MESSAGE value="Project Changes" />
     <MESSAGE value="Index Page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Index Page" />
+    <MESSAGE value="Device Integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Device Integration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -343,6 +348,10 @@
           <caret line="196" column="32" lean-forward="true" selection-start-line="196" selection-start-column="32" selection-end-line="196" selection-end-column="32" />
           <folding>
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -360,11 +369,14 @@
           <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-            <element signature="e#69#791#0" expanded="true" />
+            <element signature="e#69#3576#0" expanded="true" />
             <element signature="e#326#1320#0" expanded="true" />
-            <element signature="e#1367#2461#0" expanded="true" />
+            <element signature="e#1367#3573#0" expanded="true" />
             <element signature="e#1416#1726#0" expanded="true" />
-            <element signature="e#2137#2453#0" expanded="true" />
+            <element signature="e#3055#3565#0" expanded="true" />
+            <element signature="e#3615#3752#0" expanded="true" />
+            <element signature="e#3803#3939#0" expanded="true" />
+            <element signature="e#3990#4127#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -385,6 +397,10 @@
           <caret line="209" column="17" lean-forward="true" selection-start-line="209" selection-start-column="17" selection-end-line="209" selection-end-column="17" />
           <folding>
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -412,11 +428,14 @@
           <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-            <element signature="e#69#791#0" expanded="true" />
+            <element signature="e#69#3576#0" expanded="true" />
             <element signature="e#326#1320#0" expanded="true" />
-            <element signature="e#1367#2461#0" expanded="true" />
+            <element signature="e#1367#3573#0" expanded="true" />
             <element signature="e#1416#1726#0" expanded="true" />
-            <element signature="e#2137#2453#0" expanded="true" />
+            <element signature="e#3055#3565#0" expanded="true" />
+            <element signature="e#3615#3752#0" expanded="true" />
+            <element signature="e#3803#3939#0" expanded="true" />
+            <element signature="e#3990#4127#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -427,6 +446,10 @@
           <caret line="202" column="12" lean-forward="true" selection-end-line="215" selection-end-column="7" />
           <folding>
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -447,6 +470,10 @@
           <caret line="146" column="12" lean-forward="true" selection-start-line="146" selection-start-column="12" selection-end-line="146" selection-end-column="12" />
           <folding>
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -457,6 +484,10 @@
           <caret line="187" column="4" lean-forward="true" selection-start-line="187" selection-start-column="4" selection-end-line="187" selection-end-column="4" />
           <folding>
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -585,42 +616,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/home.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/deviceList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="309" column="3" selection-start-line="309" selection-start-column="3" selection-end-line="309" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#69#6100#0" expanded="true" />
+            <element signature="e#3422#3588#0" expanded="true" />
+            <element signature="e#3620#3790#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="215" column="7" selection-start-line="215" selection-start-column="7" selection-end-line="215" selection-end-column="7" />
+          <caret line="361" column="7" selection-start-line="361" selection-start-column="7" selection-end-line="361" selection-end-column="7" />
+          <folding>
+            <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/temp.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="207" column="61" selection-start-line="207" selection-start-column="61" selection-end-line="207" selection-end-column="61" />
+        <state relative-caret-position="170">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#4933#9289#0" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/logic.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="81" column="3" selection-start-line="81" selection-start-column="3" selection-end-line="81" selection-end-column="3" />
+        <state relative-caret-position="493">
+          <caret line="126" column="3" selection-start-line="126" selection-start-column="3" selection-end-line="126" selection-end-column="3" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-            <element signature="e#69#791#0" expanded="true" />
+            <element signature="e#69#3576#0" expanded="true" />
             <element signature="e#326#1320#0" expanded="true" />
-            <element signature="e#1367#2461#0" expanded="true" />
+            <element signature="e#1367#3573#0" expanded="true" />
             <element signature="e#1416#1726#0" expanded="true" />
-            <element signature="e#2137#2453#0" expanded="true" />
+            <element signature="e#3055#3565#0" expanded="true" />
+            <element signature="e#3615#3752#0" expanded="true" />
+            <element signature="e#3803#3939#0" expanded="true" />
+            <element signature="e#3990#4127#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/home.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="141" column="1" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
         </state>
       </provider>
     </entry>

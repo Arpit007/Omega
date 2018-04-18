@@ -2,13 +2,47 @@
  * Created by StarkX on 18-Apr-18.
  */
 define(function (require) {
+    const audio = [ "aif", "cda", "mid", "midi", "mp3", "mpa", "ogg", "wav", "wma", "wpl" ];
+    const archive = [ "7z", "arj", "deb", "pkg", "rar", "rpm", "gz", "z", "zip" ];
+    const disk = [ "bin", "dmg", "iso", "toast", "vcd" ];
+    const code = [ "csv", "dat", "db", "log", "mdb", "sav", "sql", "tar", "xml", "c", "class", "cpp", "cs", "h", "java", "sh", "swift", "vb" ];
+    const exec = [ "apk", "bat", "bin", "cgi", "pl", "com", "exe", "gadget", "jar", "py", "wsf" ];
+    const img = [ "ai", "bmp", "gif", "ico", "jpeg", "jpg", "png", "ps", "psd", "svg", "tif", "tiff" ];
+    const web = [ "asp", "cer", "cfm", "cgi", "pl", "css", "html", "htm", "js", "jsp", "part", "php", "py", "rss", "xhtml" ];
+    const presentation = [ "key", "odp", "pps", "ppt", "pptx" ];
+    const spreadsheet = [ "ods", "xlr", "xls", "xlsx" ];
+    const system = [ "bak", "cab", "cfg", "cpl", "cur", "dll", "dmp", "drv", "icns", "ico", "ini", "lnk", "msi", "sys", "tmp" ];
+    const video = [ "3g2", "3gp", "avi", "flv", "h264", "m4v", "mkv", "mov", "mp4", "mpg", "mpeg", "rm", "swf", "vob", "wmv" ];
+    const word = [ "doc", "docx", "odt", "rtf", "tex", "txt", "wks", "wps", "wpd" ];
+    const pdf = [ "pdf" ];
+    
     const setExtension = (file) => {
-        for (let name in file.files) {
-            cFile = file.files[ name ];
-            if (cFile.isFolder) continue;
-            cFile.ext = cFile.name.substring(cFile.name.lastIndexOf('.' + 1));
+        let files = file.files;
+        for (let tag in files) {
+            if (files[ tag ].isFolder) files[ tag ].ext = "";
+            else files[ tag ].ext = files[ tag ].name.substring(files[ tag ].name.lastIndexOf('.') + 1);
         }
     };
+    
+    const getClass = (file) => {
+        let ext = file.ext;
+        if (file.isFolder) return "fa-folder folder";
+        if (audio.includes(ext)) return "fa-file-audio audio";
+        if (archive.includes(ext)) return "fa-file-archive archive";
+        if (disk.includes(ext)) return "fa-dot-circle dvd";
+        if (code.includes(ext)) return "fa-file-code code";
+        if (exec.includes(ext)) return "fa-sticky-note note";
+        if (img.includes(ext)) return "fa-file-image image";
+        if (web.includes(ext)) return "fa-globe web";
+        if (presentation.includes(ext)) return "fa-file-powerpoint power";
+        if (spreadsheet.includes(ext)) return "fa-file-excel spread";
+        if (system.includes(ext)) return "fa-cogs cog";
+        if (video.includes(ext)) return "fa-file-video vid";
+        if (word.includes(ext)) return "fa-file-word word";
+        if (pdf.includes(ext)) return "fa-file-pdf pdf";
+        return "fa-file file";
+    };
+    
     
     class Buffer {
         constructor() {
@@ -54,7 +88,31 @@ define(function (require) {
         constructor() {
             this.buffer = new Buffer();
             this.current = null;
+            this.mode = localStorage.mode || 'none';
             this.queue = [];
+        }
+        
+        setMode(mode) {
+            if (this.mode !== mode) {
+                this.mode = mode;
+                localStorage.mode = mode;
+                this.update();
+            }
+        }
+        
+        * fileIterator() {
+            let dict = {}, queue = [];
+            for (let path in this.current.files) {
+                dict[ this.current.files[ path ].name ] = path;
+                queue.push(this.current.files[ path ].name);
+            }
+            if (this.mode !== 'none') {
+                queue.sort();
+                if (this.mode === 'desc')
+                    queue.reverse();
+            }
+            for (let item of queue)
+                yield this.current.files[ dict[ item ] ];
         }
         
         isEmpty() {
@@ -99,8 +157,42 @@ define(function (require) {
             this.current = null;
         }
         
+        refresh(file) {
+            this.queue.pop();
+            this.queue.push(file);
+            this.current = file;
+            this.update();
+        }
+        
         update() {
-            //Todo: Add to DOM
+            let files = $('#files');
+            files.children().remove();
+            if (this.current == null) return;
+            
+            let temp = $('#templateFile').html();
+            for (let file of this.fileIterator()) {
+                let html = new String(temp);
+                html = html.replace("__genericPath__", file.path)
+                    .replace("__genericClass__", getClass(file))
+                    .replace("__genericFileName__", file.name);
+                files.append($($.parseHTML(html)));
+            }
+        }
+        
+        canExplore(path) {
+            if (this.current == null) return false;
+            return (path in this.current.files && this.current.files[ path ].isFolder);
+        }
+        
+        goToRoot() {
+            if (this.queue.size < 1) return;
+            this.queue.splice(1);
+            this.current = this.queue[ 0 ];
+            this.update();
+        }
+        
+        getCurrent() {
+            return this.current;
         }
         
         getBuffer() {
@@ -205,8 +297,8 @@ define(function (require) {
             $('#menuPanel').children().remove();
         }
         
-        setDevice(deviceId){
-            this.current = this.deviceList[deviceId];
+        setDevice(deviceId) {
+            this.current = this.deviceList[ deviceId ];
         }
         
         isCurrent(deviceId) {

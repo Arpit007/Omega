@@ -72,11 +72,56 @@ define(function (require) {
         $('#menuPanel').on('click', '.menuLabel', function () {
             let deviceId = $(this).attr("deviceId");
             if (!deviceList.isCurrent(deviceId)) {
+                deviceList.setDevice(deviceId);
                 socket.emit('root', deviceId, (files) => {
-                    deviceList.setDevice(deviceId);
-                    deviceList.explorer.setRoot(files);
+                    deviceList.getExplorer().setRoot(files);
                 });
             }
+        });
+        
+        $('#files').on('click', '.fileLink', function () {
+            let path = $(this).attr("filePath");
+            if (!deviceList.getExplorer().canExplore(path)) return;
+            socket.emit('path', deviceList.current.Id, path, (file) => {
+                deviceList.explorer.addPath(file);
+            });
+        });
+        
+        $('#root').on('click', () => {
+            deviceList.getExplorer().goToRoot();
+        });
+        
+        $('#up').on('click', () => {
+            deviceList.getExplorer().goUp();
+        });
+        
+        $('#refresh').on('click', () => {
+            if (!deviceList.isDeviceSelected()) return;
+            if (deviceList.getExplorer().isRoot()) {
+                socket.emit('root', deviceList.current.Id, (files) => {
+                    deviceList.getExplorer().refresh(files);
+                });
+            }
+            else {
+                socket.emit('path', deviceList.current.Id, deviceList.getExplorer().getCurrent().path, (file) => {
+                    deviceList.explorer.refresh(file);
+                });
+            }
+        });
+        
+        $('#filterNo').on('click',()=>{
+            deviceList.getExplorer().setMode('none');
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+        
+        $('#filterAsc').on('click',()=>{
+            deviceList.getExplorer().setMode('asc');
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+        
+        $('#filterDsc').on('click',()=>{
+            deviceList.getExplorer().setMode('desc');
+            $(this).addClass('active').siblings().removeClass('active');
         });
     };
 });

@@ -53,9 +53,10 @@ device.on('connection', (socket) => auth(socket, (socket) => {
     
     socket.on('disconnect', () => {
         activeUsers.offlineDevice(socket);
+        //TOdo:Check
         return deviceModel.getDeviceById(socket.deviceId)
             .then((device) => {
-                return device.updateLastSeen();
+                return deviceModel.updateLastSeen(device);
             });
     });
     
@@ -96,7 +97,16 @@ const registerClientEvents = (socket) => {
         let deviceSocket = activeUsers.getDeviceSocket(socket.userId, deviceId);
         if (deviceSocket) {
             deviceSocket.emit('root', (files) => {
-                ack(files);
+                ack(JSON.parse(files));
+            });
+        }
+    });
+    
+    socket.on('path', (deviceId, path, ack) => {
+        let deviceSocket = activeUsers.getDeviceSocket(socket.userId, deviceId);
+        if (deviceSocket) {
+            deviceSocket.emit('path', path, (files) => {
+                ack(JSON.parse(files));
             });
         }
     });

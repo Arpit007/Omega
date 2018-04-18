@@ -27,8 +27,7 @@ DeviceSchema.statics.login = (user, accessToken, name) => {
     });
 };
 
-DeviceSchema.methods.updateLastSeen = () => {
-    let device = this;
+DeviceSchema.statics.updateLastSeen = (device) => {
     device.lastActive = new Date();
     return device.save();
 };
