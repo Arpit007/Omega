@@ -42,6 +42,6 @@
     "socket.io": "^2.0.4",
     "strip-json-comments": "^2.0.1",
     "stylus": "0.54.5",
-    "validator": "^9.4.1"
+    "validator": "^13.7.0"
   }
 }
