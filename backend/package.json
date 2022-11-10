@@ -39,7 +39,7 @@
     "request-promise": "^4.2.2",
     "sanitize": "^2.1.0",
     "serve-favicon": "~2.4.5",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.5.0",
     "strip-json-comments": "^2.0.1",
     "stylus": "0.54.5",
     "validator": "^9.4.1"
